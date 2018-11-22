@@ -10,19 +10,14 @@ http://forum.kerbalspaceprogram.com/index.php?showtopic=140541
 
 ## Requirements
 
-* KSP version 1.3 (build 1804) is the only supported KSP version
+* KSP version 1.5.1 (build 2335) is the only supported KSP version
 * [ModuleManager](http://forum.kerbalspaceprogram.com/index.php?showtopic=50533) is required.
 
 ## Installation
 
 * Remove any previous installation of B9PartSwitch
 * Make sure the latest version of ModuleManager is installed
-* Copy the B9PartSwitch directory to your KSP GameData directory.
-
-## Contributors
-
-* [blowfish](http://forum.kerbalspaceprogram.com/index.php?/profile/119688-blowfish/) - primary developer
-* [bac9](http://forum.kerbalspaceprogram.com/index.php?/profile/57757-bac9/) - author of [PartSubtypeSwitcher](https://bitbucket.org/bac9/ksp_plugins), on which this plugin is heavily based
+* Copy the B9PartSwitch directory to your KSP GameData directory
 
 ## Source
 
@@ -34,6 +29,122 @@ This plugin is distributed under [LGPL v3.0](http://www.gnu.org/licenses/lgpl-3.
 
 ## Changelog
 
+### v2.5.0
+
+* Allow moving stack nodes
+  * Within a `SUBTYPE`, `NODE` nodes take a `name` (node ID) and a `position` (x, y, z position of the node)
+* Fix log message for duplicated subtype names
+* Fix texture switching behaving weirdly when copying a part in the editor
+
+### v2.4.5
+
+* Fix issues with resource switching and stock delta-v simulation code
+  * Exception when copying a part in the editor
+  * Delta-v simulation was probably off as well
+
+### v2.4.4
+
+* Recompile against KSP 1.5.1
+* Downgrade certain fatal errors to warnings
+  * The user will still get an on-screen message but it can be dismissed without closing the game
+  * Duplicate subtype names is now only a serious warning
+  * Subtype without a name is now only a serious warning
+
+### v2.4.3
+
+* Fix .version file again again
+
+### v2.4.2
+
+* Fix .version file again
+
+### v2.4.1
+
+* Fix .version file still listing KSP 1.4.x
+
+### v2.4.0
+
+* Recompile against KSP 1.5
+* Provide better context for fatal exceptions
+* A few incompatibilities that previously silently disabled functionality are now fatal errors
+* Add Spanish translation of built-in strings
+* Fire onPartResourceListChange when changing resources
+
+### v2.3.3
+
+* Recompile against KSP 1.4.5
+
+### v2.3.2
+
+* Recompile against KSP 1.4.4
+
+### v2.3.1
+
+* Fix ModuleJettison shroud disappearing in flight if used with a ModuleB9PartSwitch that affects drag cubes
+* Don't destroy info module in flight since that messes with module order
+
+### v2.3.0
+
+* Recompile against KSP 1.4.3
+* Remove a couple of hacky workarounds as fixes/improvements were added in KSP 1.4.3
+* Use resource display names rather than identifiers in module description
+* Extract all hard-coded UI strings into localization table
+
+### v2.2.2
+
+* Fix texture replacements getting locked in when loading a craft in the editor if a part up the hierarchy renders procedural drag cubes
+
+### v2.2.1
+
+* Recompile against KSP 1.4.2
+* Fix transforms incorrectly being disabled in the part icon if subtypes are in a particular order
+* Fix `transform` in a `TEXTURE` node looking for renderers in child transforms too
+
+### v2.2.0
+
+* Recompile for KSP 1.4.1
+
+### v2.1.1
+
+* Fix texture replacements being reset when drag cubes are rendered
+* Fix battery tank type having 100x too much electric charge, bring mass in-line with stock
+
+### v2.1.0
+
+* Add texture switching
+  * Each subtype can now have `TEXTURE` nodes which take the following fields:
+    * `texture` (required) - path to the texture you want to use, e.g. `MyMod/Parts/SomePart/texture`
+    * `currentTexture` (optional) - name of the current texture (just the filename excluding the extension, not the full path).  Anything that does not have this as the current texture will be ignored.
+    * `isNormalMap` (optional, default false) - whether the texture is a normal map or not (necessary due to KSP treating normal maps differently when they are loaded)
+    * `shaderProperty` (optional) - name of the shader property that the texture sits on.  Default is `_MainTex` if `isNormalMap = false` or `_BumpMap` if `isNormalMap = true`.  For an emissive texture you would want `_Emissive`
+    * `transform` (optional, can appear more than once) - names of transforms to apply the texture switch to
+    * `baseTransform` (optional, can appear more than once) - names of transforms where the texture switch should be applied to them and all of their children
+  * If no `transform` or `baseTransform` is specified, it will look for textures to switch on the entire part
+
+### v2.0.0
+
+* Only match on exact attach node id
+* When switching in flight, resources should always start empty
+* Allow individual subtypes to not allow switching in flight via `allowSwitchInFlight` field
+* Allow `ModuleB9PartSwitch` to have its GUI hidden if it has `advancedTweakablesOnly = true` and advanced tweakables are disabled
+* Better error handling if resource of tank type does not exist (show error dialog in game and force the user to quit)
+* Fix .version file not being able to be parsed by KSP-AVC
+* Move remote .avc file from bintray to s3
+* Add back assembly guid (accidentally removed a while ago)
+
+### v1.10.0
+
+* Add new GUI that allows selecting subtype from a list
+* Allow switching in flight via switchInFlight parameter (uses new GUI)
+
+### v1.9.0
+
+* Add stackSymmetry part field to subtypes
+
+### v1.8.1
+
+* Fix drag cubes being overwritten with defaults on root part in flight scene
+* Fix vessel disappearing from map view if root part has a switcher that affects drag cubes
 
 ### v1.8.0
 
