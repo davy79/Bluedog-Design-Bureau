@@ -1,0 +1,13 @@
+This module manager mod for Bluedog Design Bureau aims to make the BDB rockets
+useable in the Real Solar System in the simplest way possible.
+
+It does not aim to be realistic so it's not intented to be used with the
+realism overhaul.
+
+What is does:
+The mod will simple upgrade all BDB engines and RCS thrusters by increasing
+Their max. thrust and doubling their ISP.
+What this does is give them more thrust to get off the ground (duh) and make
+the engines (unrealistically) more efficient so they get double the DeltaV
+out of the same fueltank.
+This will allow rockets build with BDB parts to achieve orbit in RSS.
